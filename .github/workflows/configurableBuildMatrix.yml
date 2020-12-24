@@ -10,11 +10,11 @@ jobs:
     - name: Check out code into the Go module directory
       uses: actions/checkout@v2
     - id: set-matrix
-      run: |        
+      run: |   
         branchName=$(echo '${{ github.ref }}' | sed 's,refs/heads/,,g')  
-        matrix=$(jq --arg branchName "$branchName" 'map(. | select((.runOn==$branchName) or (.runOn=="always")) )' os_definitions.json)        
+        matrix=$(jq --arg branchName "$branchName" 'map(. | select((.runOn==$branchName) or (.runOn=="always")) )' matrix_includes.json)        
         echo ::set-output name=matrix::{\"include\":$(echo $matrix)}\"
-  build-n-test:
+  build-n-test:    
     needs: matrix_prep
     runs-on: ${{ matrix.runs_on }}
     strategy:

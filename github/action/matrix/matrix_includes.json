@@ -8,7 +8,7 @@
       "cpp_version": "c++17",
       "config_name": "Release",
       "extra_config_args": "--apply-default-release-flags --trace2file enable",
-      "run": "always"
+      "runOn": "always"
    },
    {
       "displayTargetName": "ubuntu-18.04-g++-8 (Debug)",
@@ -19,7 +19,7 @@
       "cpp_version": "c++17",
       "config_name": "Debug",
       "extra_config_args": "--apply-default-debug-flags --trace2file enable",
-      "run": "always"
+      "runOn": "always"
    },
    {
       "displayTargetName": "ubuntu-20.04-g++-9 (Debug)",
@@ -30,7 +30,7 @@
       "cpp_version": "c++17",
       "config_name": "Debug",
       "extra_config_args": "--apply-default-debug-flags --trace2file enable",
-      "run": "Release"
+      "runOn": "v2.1-Release"
    },
    {
       "displayTargetName": "ubuntu-20.04-g++-10 (Debug)",
@@ -41,7 +41,7 @@
       "cpp_version": "c++17",
       "config_name": "Debug",
       "extra_config_args": "--apply-default-debug-flags --trace2file enable",
-      "run": "Release"
+      "runOn": "v2.1-Release"
    },
    {
       "displayTargetName": "ubuntu-20.04-g++-10",
@@ -52,7 +52,7 @@
       "cpp_version": "c++17",
       "config_name": "Release",
       "extra_config_args": "--apply-default-release-flags --trace2file enable",
-      "run": "always"
+      "runOn": "always"
    },
    {
       "displayTargetName": "ubuntu-20.04-g++-10-c++2a",
@@ -63,7 +63,7 @@
       "cpp_version": "c++2a",
       "config_name": "Release",
       "extra_config_args": "--apply-default-release-flags --trace2file enable",
-      "run": "Release"
+      "runOn": "v2.1-Release"
    },
    {
       "displayTargetName": "ubuntu-20.04-clang++-10",
@@ -74,6 +74,6 @@
       "cpp_version": "c++17",
       "config_name": "Release",
       "extra_config_args": "--apply-default-release-flags --trace2file enable",
-      "run": "Release"
+      "runOn": "v2.1-Release"
    }
 ]
