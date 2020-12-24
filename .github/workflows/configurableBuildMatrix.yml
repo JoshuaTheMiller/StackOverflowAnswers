@@ -1,0 +1,27 @@
+name: Configurable Build Matrix
+
+on: push
+jobs:
+  matrix_prep:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v2
+    - id: set-matrix
+      run: |        
+        runSpecifier=$(echo '${{ github.ref }}' | sed 's,refs/heads/.*-,,g')  
+        matrix=$(jq --arg runSpecifier "$runSpecifier" 'map(. | select((.run==$runSpecifier) or (.run=="always")) ) | tostring' os_definitions.json)
+        noEndQuote=${matrix#"\""}
+        withStrippedQuotes=${noEndQuote%"\""}
+        withStrippedSlashes=${withStrippedQuotes//\\}
+        concat="::set-output name=matrix::{\"include\":$withStrippedSlashes}"
+        echo $concat
+  build-n-test:
+    needs: matrix_prep
+    runs-on: ${{ matrix.runs_on }}
+    strategy:
+      matrix: ${{fromJson(needs.matrix_prep.outputs.matrix)}}
+    steps:
+    - run: echo "Hello ${{ matrix.someValue }}"
