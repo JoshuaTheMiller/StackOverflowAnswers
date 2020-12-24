@@ -1,3 +1,9 @@
+TLDR: you can do what you want with **one** workflow by filtering the configurations you want to use in a prior build job/step, and using the result of that filtering as the matrix value in your `build-n-test` job.
+
+---
+
+Longer version:
+
 You can create a `job` (i.e. *build-n-test*) where the value of `strategy.matrix` is different based off of some criteria by setting the value of `strategy.matrix` to the deserialized `output` of a previous job (i.e. *matrix_prep*). This previous job would have the responsibility of constructing the `matrix` value as per your custom criteria. The following yaml demonstrates this (a copy has been included later on with comments added in for explanation):
 
 ```yaml
@@ -26,7 +32,7 @@ jobs:
     - run: echo "Hello ${{ matrix.someValue }}"
 ```
 
-The `matrix_includes.json` file has the following contents:
+The contents of the `matrix_includes.json` file used in the set-matrix task can be found after this paragraph. **To see what the matrix configuration from the question would look like as JSON, please look near the bottom of this answer.** I went the route of having a JSON file separate from the workflow definition itself because I found that including the raw JSON in the workflow itself was very messy (especially if the JSON file was large).
 
 ```json
 [
@@ -75,6 +81,7 @@ name: Configurable Build Matrix
 on: push
 jobs:
   matrix_prep:
+    # Using a separate job and agent so as to be able to use tools like 'sed' and 'jq'
     runs-on: ubuntu-latest
     # Defining outputs of a job allows for easier consumption and use
     outputs:
@@ -113,10 +120,10 @@ The following two screenshots are from runs on different branches using the same
 
 *Build for main branch*
 [![Build for main branch][1]][1]
-*Build for some-Release branch*
-[![Build for some-release branch][2]][2]
+*Build for v2.1-Release branch*
+[![Build for v2.1-Release branch][3]][3]
 
-This is due to one build occurring on the `main` branch, and the other occurring on the `some-Release` branch. The workflow definition is configured such that branches that end in "-Release" will use an additional "ubuntu-20.04" agent (as specified in the included json file). Please note that the definitions currently included in the linked repository are slightly different than those above.
+This is due to the first build occurring on the `main` branch, and the second occurring on the `v2.1-Release` branch. As can be seen by the included `matrix_includes.json` file above, this is to be expected as two configurations are set to run *only* when the branch is `v2.1-Release`, and only one configuration is set to run *always*.
 
 ### Further Detail
 
@@ -214,5 +221,7 @@ The JSON file was created to simulate the **content** of the `includes` statemen
 ]
 ```
 
-  [1]: https://i.stack.imgur.com/looi6.png
-  [2]: https://i.stack.imgur.com/7Tlvd.png
+
+  [1]: https://i.stack.imgur.com/O95fj.png
+  [2]: https://i.stack.imgur.com/77RZf.png
+  [3]: https://i.stack.imgur.com/bXFfX.png
