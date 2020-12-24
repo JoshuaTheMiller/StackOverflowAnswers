@@ -12,12 +12,8 @@ jobs:
     - id: set-matrix
       run: |        
         runSpecifier=$(echo '${{ github.ref }}' | sed 's,refs/heads/.*-,,g')  
-        matrix=$(jq --arg runSpecifier "$runSpecifier" 'map(. | select((.run==$runSpecifier) or (.run=="always")) ) | tostring' os_definitions.json)
-        noEndQuote=${matrix#"\""}
-        withStrippedQuotes=${noEndQuote%"\""}
-        withStrippedSlashes=${withStrippedQuotes//\\}
-        concat="::set-output name=matrix::{\"include\":$withStrippedSlashes}"
-        echo $concat
+        matrix=$(jq --arg runSpecifier "$runSpecifier" 'map(. | select((.run==$runSpecifier) or (.run=="always")) )' os_definitions.json)        
+        echo ::set-output name=matrix::{\"include\":$(echo $matrix)}\"
   build-n-test:
     needs: matrix_prep
     runs-on: ${{ matrix.runs_on }}
