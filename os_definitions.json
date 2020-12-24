@@ -1,0 +1,17 @@
+[
+    {
+        "runs_on":"ubuntu-16.04",
+        "someValue":"Foo",
+        "run":"always"
+    },
+    {
+        "runs_on":"ubuntu-18.04",
+        "someValue":"Bar",
+        "run":"always"
+    },
+    {
+        "runs_on":"ubuntu-20.04",
+        "someValue":"Hello again",
+        "run":"Release"
+    }
+]

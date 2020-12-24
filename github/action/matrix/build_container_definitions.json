@@ -1,0 +1,79 @@
+[
+   {
+      "displayTargetName": "centos-8",
+      "os": "unix",
+      "compiler": "g++",
+      "runs_on": "ubuntu-latest",
+      "container_image": "sophistsolutionsinc/stroika-buildvm-centos-8-small",
+      "cpp_version": "c++17",
+      "config_name": "Release",
+      "extra_config_args": "--apply-default-release-flags --trace2file enable",
+      "includeInDevBranchBuilds": true
+   },
+   {
+      "displayTargetName": "ubuntu-18.04-g++-8 (Debug)",
+      "os": "unix",
+      "compiler": "g++-8",
+      "runs_on": "ubuntu-latest",
+      "container_image": "sophistsolutionsinc/stroika-buildvm-ubuntu1804-regression-tests",
+      "cpp_version": "c++17",
+      "config_name": "Debug",
+      "extra_config_args": "--apply-default-debug-flags --trace2file enable",
+      "includeInDevBranchBuilds": true
+   },
+   {
+      "displayTargetName": "ubuntu-20.04-g++-9 (Debug)",
+      "os": "unix",
+      "compiler": "g++-9",
+      "runs_on": "ubuntu-latest",
+      "container_image": "sophistsolutionsinc/stroika-buildvm-ubuntu2004-regression-tests",
+      "cpp_version": "c++17",
+      "config_name": "Debug",
+      "extra_config_args": "--apply-default-debug-flags --trace2file enable",
+      "includeInDevBranchBuilds": false
+   },
+   {
+      "displayTargetName": "ubuntu-20.04-g++-10 (Debug)",
+      "os": "unix",
+      "compiler": "g++-10",
+      "runs_on": "ubuntu-latest",
+      "container_image": "sophistsolutionsinc/stroika-buildvm-ubuntu2004-regression-tests",
+      "cpp_version": "c++17",
+      "config_name": "Debug",
+      "extra_config_args": "--apply-default-debug-flags --trace2file enable",
+      "includeInDevBranchBuilds": false
+   },
+   {
+      "displayTargetName": "ubuntu-20.04-g++-10",
+      "os": "unix",
+      "compiler": "g++-10",
+      "runs_on": "ubuntu-latest",
+      "container_image": "sophistsolutionsinc/stroika-buildvm-ubuntu2004-regression-tests",
+      "cpp_version": "c++17",
+      "config_name": "Release",
+      "extra_config_args": "--apply-default-release-flags --trace2file enable",
+      "includeInDevBranchBuilds": true
+   },
+   {
+      "displayTargetName": "ubuntu-20.04-g++-10-c++2a",
+      "os": "unix",
+      "compiler": "g++-10",
+      "runs_on": "ubuntu-latest",
+      "container_image": "sophistsolutionsinc/stroika-buildvm-ubuntu2004-regression-tests",
+      "cpp_version": "c++2a",
+      "config_name": "Release",
+      "extra_config_args": "--apply-default-release-flags --trace2file enable",
+      "includeInDevBranchBuilds": false
+   },
+   {
+      "displayTargetName": "ubuntu-20.04-clang++-10",
+      "os": "unix",
+      "compiler": "clang++-10",
+      "runs_on": "ubuntu-latest",
+      "container_image": "sophistsolutionsinc/stroika-buildvm-ubuntu2004-regression-tests",
+      "cpp_version": "c++17",
+      "config_name": "Release",
+      "extra_config_args": "--apply-default-release-flags --trace2file enable",
+      "includeInDevBranchBuilds": false
+   }
+]
